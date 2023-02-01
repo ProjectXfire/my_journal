@@ -33,13 +33,15 @@ export const Note = () => {
 
   //--> Renders
 
+  if (!active) return <></>;
+
   return (
     <Grid container sx={{ p: 2 }}>
       <Grid xs={12} item>
         <Formik
           initialValues={{
-            title: active?.title!,
-            body: active?.body!,
+            title: active.title,
+            body: active.body,
           }}
           enableReinitialize
           validationSchema={NoteSchema}
@@ -58,7 +60,7 @@ export const Note = () => {
                       alignItems="center"
                     >
                       <Typography fontSize={30}>
-                        {formattingDate(active?.date)}
+                        {formattingDate(active.date)}
                       </Typography>
                       <Box sx={{ display: "flex", gap: 1 }}>
                         <Button

@@ -45,11 +45,12 @@ export const useJournal = () => {
   };
 
   const savingNote = (title: string, body: string) => {
+    if (!active) return;
     const note: INote = {
       title,
       body,
       imageURLs: active?.imageURLs || [],
-      date: active?.date,
+      date: active.date,
     };
     cleanPreviewImages();
     dispatch(savingNewNote(note, imagesFormData));
@@ -58,7 +59,7 @@ export const useJournal = () => {
   const onGetFilesToSave = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files as FileList;
     const files = [];
-    for (let i = 0; i < files.length; i++) {
+    for (let i = 0; i < fileList.length; i++) {
       files.push(fileList[i]);
     }
     const { imageFiles, convertBase64Images, allImagesAreOk } =
